@@ -1,0 +1,229 @@
+perfil:
+  resumo: |
+    Desenvolvedor frontend e full stack residente no Brasil, com experiência em React,
+    React Native, TypeScript, JavaScript e aplicações web e mobile. Inglês profissional.
+
+objetivo:
+  pais_residencia: BR
+  fusos_aceitos: ["UTC-5", "UTC-4", "UTC-3", "UTC-2"]
+  moedas_preferidas: [USD, EUR, GBP, CAD, CHF, AUD, NZD]
+  modalidades: [full-time, contractor, eor]
+  aceita_vaga_brasileira: true
+
+filtros:
+  titulos_aceitos:
+    - 'software.*engineer'
+    - 'software.*developer'
+    - 'front.?end'
+    - 'full.?stack'
+    - 'web.*(?:developer|engineer)'
+    - 'mobile.*(?:developer|engineer)'
+    - 'react(?: native)?.*(?:developer|engineer)'
+    - '(?:typescript|javascript).*(?:developer|engineer)'
+  titulos_rejeitados:
+    - '\b(?:senior|sr)\b\.?'
+    - '\bstaff\b'
+    - '\bprincipal\b'
+    - '\blead\b'
+    - '\b(?:specialist|spec)\b'
+    - '\barchitect\b'
+    - '\bhead\b'
+    - '\bchief\b'
+    - '\bdistinguished\b'
+    - '\bmanager\b'
+    - '\bdirector\b'
+    - '\bvp\b'
+    - '\bintern(ship)?\b'
+    - 'back.?end'
+    - '\bdevops\b'
+    - 'site reliability'
+    - 'platform engineer'
+    - 'data engineer'
+    - 'machine learning'
+    - '\bml engineer'
+    - '\bqa\b'
+    - 'quality assurance'
+    - '\btest(?:ing)? engineer'
+    - 'security engineer'
+    - 'cloud engineer'
+    - 'infrastructure engineer'
+  senioridades: []
+  tecnologias: [React, React Native, TypeScript, JavaScript]
+  exigir_tecnologia_compativel: true
+  palavras_rejeitadas: []
+  idiomas_aceitos: [en, pt]
+  moedas_rejeitadas: [BRL]
+  idade_maxima_dias: 7
+
+buscas:
+  termos: [React, React Native, TypeScript, JavaScript, Frontend, Full Stack, Web, Mobile]
+  arc_tags: [reactjs, react-native, typescript, javascript, full-stack-development]
+  consultas_xray: []
+
+empresas:
+  - { nome: Airbnb, ats: greenhouse, board: airbnb, prioridade: alta }
+  - { nome: Affirm, ats: greenhouse, board: affirm, prioridade: alta }
+  - { nome: Asana, ats: greenhouse, board: asana }
+  - { nome: Brex, ats: greenhouse, board: brex, prioridade: alta }
+  - { nome: Canonical, ats: greenhouse, board: canonical, prioridade: alta }
+  - { nome: Chime, ats: greenhouse, board: chime }
+  - { nome: Cloudflare, ats: greenhouse, board: cloudflare, prioridade: alta }
+  - { nome: Cockroach Labs, ats: greenhouse, board: cockroachlabs }
+  - { nome: Coinbase, ats: greenhouse, board: coinbase }
+  - { nome: Coursera, ats: greenhouse, board: coursera }
+  - { nome: Databricks, ats: greenhouse, board: databricks }
+  - { nome: Datadog, ats: greenhouse, board: datadog }
+  - { nome: Discord, ats: greenhouse, board: discord }
+  - { nome: Dropbox, ats: greenhouse, board: dropbox }
+  - { nome: Duolingo, ats: greenhouse, board: duolingo }
+  - { nome: Elastic, ats: greenhouse, board: elastic, prioridade: alta }
+  - { nome: Figma, ats: greenhouse, board: figma }
+  - { nome: GitLab, ats: greenhouse, board: gitlab, prioridade: alta }
+  - { nome: HubSpot, ats: greenhouse, board: hubspot }
+  - { nome: Instacart, ats: greenhouse, board: instacart }
+  - { nome: Intercom, ats: greenhouse, board: intercom }
+  - { nome: Lyft, ats: greenhouse, board: lyft }
+  - { nome: Mixpanel, ats: greenhouse, board: mixpanel }
+  - { nome: MongoDB, ats: greenhouse, board: mongodb }
+  - { nome: Postman, ats: greenhouse, board: postman }
+  - { nome: Reddit, ats: greenhouse, board: reddit }
+  - { nome: Robinhood, ats: greenhouse, board: robinhood }
+  - { nome: Scale AI, ats: greenhouse, board: scaleai }
+  - { nome: Stripe, ats: greenhouse, board: stripe }
+  - { nome: Thoughtworks, ats: greenhouse, board: thoughtworks, prioridade: alta }
+  - { nome: Twilio, ats: greenhouse, board: twilio }
+  - { nome: Typeform, ats: greenhouse, board: typeform }
+  - { nome: Webflow, ats: greenhouse, board: webflow, prioridade: alta }
+  - { nome: CircleCI, ats: greenhouse, board: circleci, prioridade: alta }
+  - { nome: Consensys, ats: greenhouse, board: consensys, prioridade: alta }
+  - { nome: Modern Health, ats: greenhouse, board: modernhealth }
+  - { nome: Zup Innovation, ats: greenhouse, board: zupinnovation }
+  - { nome: Gusto, ats: greenhouse, board: gusto }
+  - { nome: Klaviyo, ats: greenhouse, board: klaviyo }
+  - { nome: Toast, ats: greenhouse, board: toast }
+  - { nome: Samsara, ats: greenhouse, board: samsara }
+  - { nome: Okta, ats: greenhouse, board: okta }
+  - { nome: Rubrik, ats: greenhouse, board: rubrik }
+  - { nome: Netlify, ats: greenhouse, board: netlify, prioridade: alta }
+  - { nome: PagerDuty, ats: greenhouse, board: pagerduty }
+  - { nome: New Relic, ats: greenhouse, board: newrelic }
+  - { nome: JetBrains, ats: greenhouse, board: jetbrains }
+  - { nome: Algolia, ats: greenhouse, board: algolia }
+  - { nome: Veriff, ats: greenhouse, board: veriff }
+  - { nome: Apollo, ats: greenhouse, board: apolloio }
+  - { nome: Amplitude, ats: greenhouse, board: amplitude }
+  - { nome: BitGo, ats: greenhouse, board: bitgo }
+  - { nome: Contentful, ats: greenhouse, board: contentful }
+  - { nome: Fastly, ats: greenhouse, board: fastly }
+  - { nome: Adyen, ats: greenhouse, board: adyen }
+  - { nome: Honeycomb, ats: greenhouse, board: honeycomb, prioridade: alta }
+  - { nome: Flexport, ats: greenhouse, board: flexport }
+  - { nome: LaunchDarkly, ats: greenhouse, board: launchdarkly }
+  - { nome: Lattice, ats: greenhouse, board: lattice }
+  - { nome: Mercury, ats: greenhouse, board: mercury }
+  - { nome: Marqeta, ats: greenhouse, board: marqeta }
+  - { nome: N26, ats: greenhouse, board: n26 }
+  - { nome: SecurityScorecard, ats: greenhouse, board: securityscorecard }
+  - { nome: Ripple, ats: greenhouse, board: ripple }
+  - { nome: SingleStore, ats: greenhouse, board: singleStore }
+  - { nome: Block, ats: greenhouse, board: block }
+  - { nome: Vercel, ats: greenhouse, board: vercel, prioridade: alta }
+  - { nome: ZoomInfo, ats: greenhouse, board: zoominfo }
+  - { nome: Workato, ats: greenhouse, board: workato }
+  - { nome: Alloy, ats: greenhouse, board: alloy }
+  - { nome: Abnormal Security, ats: greenhouse, board: abnormalsecurity }
+  - { nome: AppsFlyer, ats: greenhouse, board: appsflyer }
+  - { nome: Agoda, ats: greenhouse, board: agoda }
+  - { nome: Axonius, ats: greenhouse, board: axonius }
+  - { nome: Airtable, ats: greenhouse, board: airtable }
+  - { nome: Bitly, ats: greenhouse, board: bitly }
+  - { nome: Bitpanda, ats: greenhouse, board: bitpanda }
+  - { nome: Buildkite, ats: greenhouse, board: buildkite, prioridade: alta }
+  - { nome: Blockchain.com, ats: greenhouse, board: blockchain }
+  - { nome: commercetools, ats: greenhouse, board: commercetools }
+  - { nome: Contentstack, ats: greenhouse, board: contentstack }
+  - { nome: Cribl, ats: greenhouse, board: cribl }
+  - { nome: Google DeepMind, ats: greenhouse, board: deepmind }
+  - { nome: Dispatch, ats: greenhouse, board: dispatch }
+  - { nome: Domino Data Lab, ats: greenhouse, board: dominoDataLab }
+  - { nome: Dashlane, ats: greenhouse, board: dashlane }
+  - { nome: CoreWeave, ats: greenhouse, board: coreweave }
+  - { nome: Dialpad, ats: greenhouse, board: dialpad }
+  - { nome: Fireblocks, ats: greenhouse, board: fireblocks }
+  - { nome: Figment, ats: greenhouse, board: figment }
+  - { nome: Greenhouse, ats: greenhouse, board: greenhouse }
+  - { nome: Grafana Labs, ats: greenhouse, board: grafanalabs, prioridade: alta }
+  - { nome: Druva, ats: greenhouse, board: druva }
+  - { nome: Forter, ats: greenhouse, board: forter }
+  - { nome: Kayak, ats: greenhouse, board: kayak }
+  - { nome: Justworks, ats: greenhouse, board: justworks }
+  - { nome: InMobi, ats: greenhouse, board: inmobi }
+  - { nome: Jumio, ats: greenhouse, board: jumio }
+  - { nome: LastPass, ats: greenhouse, board: lastpass }
+  - { nome: Human Interest, ats: greenhouse, board: humaninterest }
+  - { nome: LogicMonitor, ats: greenhouse, board: logicmonitor }
+  - { nome: Life360, ats: greenhouse, board: life360 }
+  - { nome: MasterClass, ats: greenhouse, board: masterclass }
+  - { nome: phData, ats: greenhouse, board: phdata }
+  - { nome: Pendo, ats: greenhouse, board: pendo }
+  - { nome: Pure Storage, ats: greenhouse, board: purestorage }
+  - { nome: Qualtrics, ats: greenhouse, board: qualtrics }
+  - { nome: Remote, ats: greenhouse, board: remote, prioridade: alta }
+  - { nome: Skillsoft, ats: greenhouse, board: skillsoft }
+  - { nome: OneTrust, ats: greenhouse, board: onetrust }
+  - { nome: Socialpoint, ats: greenhouse, board: socialpoint }
+  - { nome: Tanium, ats: greenhouse, board: tanium }
+  - { nome: Tines, ats: greenhouse, board: tines }
+  - { nome: Tripadvisor, ats: greenhouse, board: tripadvisor }
+  - { nome: SumUp, ats: greenhouse, board: sumup }
+  - { nome: Upwork, ats: greenhouse, board: upwork }
+  - { nome: Yext, ats: greenhouse, board: yext }
+  - { nome: Zscaler, ats: greenhouse, board: zscaler }
+  - { nome: Rocket Lab, ats: greenhouse, board: rocketlab }
+  - { nome: Sumō Logic, ats: greenhouse, board: sumologic }
+  - { nome: Linear, ats: ashby, board: linear, prioridade: alta }
+  - { nome: Deel, ats: ashby, board: Deel, prioridade: alta }
+  - { nome: Notion, ats: ashby, board: notion }
+  - { nome: Luxor, ats: ashby, board: luxor }
+  - { nome: Kindred, ats: ashby, board: kindred }
+  - { nome: Findem, ats: lever, board: findem }
+  - { nome: Appen, ats: lever, board: appen-2 }
+  - { nome: Ollie, ats: lever, board: myollie }
+  - { nome: Anomali, ats: lever, board: anomali }
+  - { nome: Lifen, ats: lever, board: lifen }
+  - { nome: Kraken, ats: lever, board: kraken, prioridade: alta }
+
+feeds:
+  google_alerts: []
+  extras: []
+
+fontes:
+  himalayas: true
+  jobicy: true
+  remote_ok: true
+  remotive: true
+  we_work_remotely: true
+  arbeitnow: true
+  hacker_news: true
+  arc: true
+  y_combinator: true
+  the_muse: true
+  get_on_board: true
+  startup_jobs: true
+  ats: true
+  linkedin_jobspy: false
+  glassdoor_jobspy: false
+  brave_search: false
+
+limites:
+  intervalo_padrao_horas: 6
+  timeout_segundos: 20
+  concorrencia_por_dominio: 1
+  itens_por_fonte: 50
+  verificar_links: true
+  revalidar_links_horas: 24
+
+ia:
+  enabled: false
+  command: claude
+  timeout_seconds: 90
