@@ -1,0 +1,13 @@
+.venv/
+.env
+.env.*
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+jobs.db
+jobs.db-shm
+jobs.db-wal
+web/node_modules/
+web/dist/
+.DS_Store
