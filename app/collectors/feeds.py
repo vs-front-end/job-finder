@@ -347,6 +347,137 @@ class StartupJobsCollector(JsonCollector):
         return jobs[: self.limit], None
 
 
+class WorkingNomadsCollector(JsonCollector):
+    def __init__(self, timeout: int, limit: int):
+        super().__init__(
+            "working_nomads", "https://www.workingnomads.com/api/exposed_jobs/", timeout, limit
+        )
+
+    async def collect(self, checkpoint: str | None = None) -> tuple[list[RawJob], str | None]:
+        items = list_of_mappings(await self._get())
+        jobs: list[RawJob] = []
+        for item in items:
+            if text(item.get("category_name")).lower() != "development":
+                continue
+            url = text(item.get("url"))
+            if not url or not text(item.get("title")):
+                continue
+            jobs.append(
+                RawJob(
+                    source=self.name,
+                    source_job_id=url,
+                    source_url=url,
+                    apply_url=url,
+                    title=text(item.get("title")),
+                    company=text(item.get("company_name"), "Unknown"),
+                    description=html_to_text(item.get("description")),
+                    location_text=text(item.get("location"), "Remote"),
+                    remote_scope="remote",
+                    date_posted=parse_datetime(item.get("pub_date")),
+                    raw_payload=dict(item),
+                )
+            )
+        return jobs[: self.limit], None
+
+
+class RemoteJobsOrgCollector(JsonCollector):
+    def __init__(self, timeout: int, limit: int):
+        super().__init__("remotejobs_org", "https://remotejobs.org/api/v1/jobs", timeout, limit)
+
+    async def collect(self, checkpoint: str | None = None) -> tuple[list[RawJob], str | None]:
+        payload = mapping(
+            await self._get({"category": "programming", "limit": min(self.limit, 50)})
+        )
+        jobs: list[RawJob] = []
+        for item in list_of_mappings(payload.get("data")):
+            job_id = identifier(item.get("id"))
+            url = text(item.get("url"))
+            if not job_id or not url or not text(item.get("title")):
+                continue
+            company = mapping(item.get("company"))
+            jobs.append(
+                RawJob(
+                    source=self.name,
+                    source_job_id=job_id,
+                    source_url=url,
+                    apply_url=text(item.get("apply_url"), url),
+                    title=text(item.get("title")),
+                    company=text(company.get("name"), "Unknown"),
+                    description=html_to_text(item.get("description")),
+                    location_text=text(item.get("location"), "Remote"),
+                    remote_scope="remote",
+                    employment_type=text(item.get("type")) or None,
+                    salary_min=number(item.get("salary_min")),
+                    salary_max=number(item.get("salary_max")),
+                    date_posted=parse_datetime(item.get("posted_at")),
+                    raw_payload=dict(item),
+                )
+            )
+        return jobs[: self.limit], None
+
+
+class LandingJobsCollector(JsonCollector):
+    def __init__(self, timeout: int, limit: int):
+        super().__init__("landing_jobs", "https://landing.jobs/api/v1/jobs", timeout, limit)
+
+    async def collect(self, checkpoint: str | None = None) -> tuple[list[RawJob], str | None]:
+        items = list_of_mappings(await self._get({"remote": "true"}))
+        items.sort(key=lambda item: text(item.get("published_at")), reverse=True)
+        jobs: list[RawJob] = []
+        for item in items:
+            if item.get("remote") is not True:
+                continue
+            job_id = identifier(item.get("id"))
+            url = text(item.get("url"))
+            if not job_id or not url or not text(item.get("title")):
+                continue
+            countries = [
+                text(location.get("country_code"))
+                for location in list_of_mappings(item.get("locations"))
+            ]
+            countries = [country for country in countries if country]
+            description = " ".join(
+                part
+                for part in (
+                    html_to_text(item.get("role_description")),
+                    html_to_text(item.get("main_requirements")),
+                )
+                if part
+            )
+            jobs.append(
+                RawJob(
+                    source=self.name,
+                    source_job_id=job_id,
+                    source_url=url,
+                    apply_url=url,
+                    title=text(item.get("title")),
+                    company=self._company(url),
+                    description=description,
+                    location_text=", ".join(countries) if countries else "Remote",
+                    remote_scope="countries" if countries else "remote",
+                    allowed_countries=countries,
+                    employment_type=text(item.get("type")) or None,
+                    salary_min=number(item.get("gross_salary_low")),
+                    salary_max=number(item.get("gross_salary_high")),
+                    salary_currency=text(item.get("currency_code")) or None,
+                    salary_period="annual",
+                    date_posted=parse_datetime(item.get("published_at")),
+                    valid_through=parse_datetime(item.get("expires_at")),
+                    raw_payload=dict(item),
+                )
+            )
+        return jobs[: self.limit], None
+
+    @staticmethod
+    def _company(url: str) -> str:
+        parts = [part for part in url.split("/") if part]
+        if "at" in parts:
+            index = parts.index("at")
+            if index + 1 < len(parts) - 1:
+                return parts[index + 1].replace("-", " ").title()
+        return "Unknown"
+
+
 class RssCollector:
     def __init__(self, name: str, url: str, timeout: int, limit: int):
         self.name = name
@@ -431,6 +562,46 @@ class WeWorkRemotelyCollector:
         latest_checkpoint = ""
         for url in self.urls:
             collected, current_checkpoint = await RssCollector(
+                self.name, url, self.timeout, self.limit
+            ).collect(checkpoint)
+            latest_checkpoint = current_checkpoint or latest_checkpoint
+            for job in collected:
+                identity = job.source_job_id or job.source_url
+                if identity in seen:
+                    continue
+                seen.add(identity)
+                jobs.append(job)
+                if len(jobs) >= self.limit:
+                    return jobs, latest_checkpoint or None
+        return jobs, latest_checkpoint or None
+
+
+class RemoteFirstJobsRssCollector(RssCollector):
+    @staticmethod
+    def _split_title(value: str) -> tuple[str, str]:
+        if " at " in value:
+            title, company = value.rsplit(" at ", 1)
+            return company.strip(), title.strip()
+        return "Unknown", value
+
+
+class RemoteFirstJobsCollector:
+    name = "remote_first_jobs"
+    urls = (
+        "https://remotefirstjobs.com/rss/jobs/react.rss",
+        "https://remotefirstjobs.com/rss/jobs/software-development.rss",
+    )
+
+    def __init__(self, timeout: int, limit: int):
+        self.timeout = timeout
+        self.limit = limit
+
+    async def collect(self, checkpoint: str | None = None) -> tuple[list[RawJob], str | None]:
+        jobs: list[RawJob] = []
+        seen: set[str] = set()
+        latest_checkpoint = ""
+        for url in self.urls:
+            collected, current_checkpoint = await RemoteFirstJobsRssCollector(
                 self.name, url, self.timeout, self.limit
             ).collect(checkpoint)
             latest_checkpoint = current_checkpoint or latest_checkpoint

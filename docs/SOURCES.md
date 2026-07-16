@@ -15,6 +15,11 @@ termos e limites da fonte.
 | The Muse | API oficial pronta, aguardando chave | categoria Software Engineering, modalidade remota e corte local de 7 dias |
 | Get on Board | HTML público estruturado, ativo | programação remota; detalhes, região, data e salário por vaga |
 | Startup Jobs | API oficial pronta, aguardando chave | remoto + engineering; a API já retorna somente os últimos 14 dias |
+| Working Nomads | API pública, ativa | endpoint `exposed_jobs` com pós-filtro local pela categoria Development |
+| RemoteJobs.org | API pública, ativa | categoria `programming`, sem chave nem cadastro |
+| Landing.jobs | API pública, ativa | `remote=true`; países permitidos, salário e validade por vaga |
+| Jobspresso | RSS público, ativo | feed geral de vagas curadas com pós-filtro técnico local |
+| RemoteFirstJobs | RSS público, ativo | feeds de React e software development, atualizados a cada 10 minutos |
 | Wellfound | manual | busca pública é bloqueada para automação; usar perfil/alertas |
 | Welcome to the Jungle / Otta | manual | pesquisa de vagas exige sessão |
 | Toptal | perfil manual | rede de talentos, sem feed público de oportunidades |
@@ -36,7 +41,11 @@ explicitamente informada é rejeitada, enquanto USD, EUR, GBP, CAD, CHF, AUD e N
 preferidas. Anúncios claramente escritos em idiomas diferentes de inglês ou português são
 removidos pelo filtro determinístico.
 
-A página **Plataformas** mantém o catálogo completo de 50 canais: fontes automáticas, redes
+Fontes avaliadas e descartadas por indisponibilidade técnica: JobsCollider (o feed redireciona
+para o RemoteFirstJobs, já coletado), SkipTheDrive (feed desativado), Remote.co (bloqueia a
+requisição) e EchoJobs (não publica feed).
+
+A página **Plataformas** mantém o catálogo completo de 55 canais: fontes automáticas, redes
 de talentos, boards regionais e ATS planejados. O estado dos perfis manuais é salvo no SQLite
 como pendente, configurado/revisado, revisão necessária ou ignorado.
 

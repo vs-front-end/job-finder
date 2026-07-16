@@ -8,12 +8,16 @@ from app.collectors.feeds import (
     ArbeitnowCollector,
     HimalayasCollector,
     JobicyCollector,
+    LandingJobsCollector,
+    RemoteFirstJobsCollector,
+    RemoteJobsOrgCollector,
     RemoteOkCollector,
     RemotiveCollector,
     RssCollector,
     StartupJobsCollector,
     TheMuseCollector,
     WeWorkRemotelyCollector,
+    WorkingNomadsCollector,
 )
 from app.collectors.hacker_news import HackerNewsCollector
 from app.collectors.public_pages import ArcCollector, GetOnBoardCollector, YCombinatorCollector
@@ -58,6 +62,18 @@ def build_collectors(config: AppConfig) -> list[Collector]:
     startup_jobs_key = os.getenv("STARTUP_JOBS_API_KEY")
     if enabled.startup_jobs and startup_jobs_key:
         collectors.append(StartupJobsCollector(timeout, limit, startup_jobs_key))
+    if enabled.working_nomads:
+        collectors.append(WorkingNomadsCollector(timeout, limit))
+    if enabled.remotejobs_org:
+        collectors.append(RemoteJobsOrgCollector(timeout, limit))
+    if enabled.landing_jobs:
+        collectors.append(LandingJobsCollector(timeout, limit))
+    if enabled.jobspresso:
+        collectors.append(
+            RssCollector("jobspresso", "https://jobspresso.co/?feed=job_feed", timeout, limit)
+        )
+    if enabled.remote_first_jobs:
+        collectors.append(RemoteFirstJobsCollector(timeout, limit))
     for index, url in enumerate(config.feeds.google_alerts):
         collectors.append(RssCollector(f"google_alert_{index + 1}", url, timeout, limit))
     for index, url in enumerate(config.feeds.extras):

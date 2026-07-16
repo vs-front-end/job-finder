@@ -10,7 +10,7 @@ dev:
 	@echo "Frontend: make frontend"
 
 backend:
-	.venv/bin/uvicorn app.main:app --reload --port 8787
+	.venv/bin/uvicorn app.main:app --reload --port 8787 --env-file .env
 
 frontend:
 	cd web && npm run dev

@@ -86,6 +86,11 @@ class SourcesConfig(StrictModel):
     the_muse: bool = True
     get_on_board: bool = True
     startup_jobs: bool = True
+    working_nomads: bool = True
+    remotejobs_org: bool = True
+    landing_jobs: bool = True
+    jobspresso: bool = True
+    remote_first_jobs: bool = True
     ats: bool = True
     linkedin_jobspy: bool = False
     glassdoor_jobspy: bool = False

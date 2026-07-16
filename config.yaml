@@ -210,6 +210,11 @@ fontes:
   the_muse: true
   get_on_board: true
   startup_jobs: true
+  working_nomads: true
+  remotejobs_org: true
+  landing_jobs: true
+  jobspresso: true
+  remote_first_jobs: true
   ats: true
   linkedin_jobspy: false
   glassdoor_jobspy: false
