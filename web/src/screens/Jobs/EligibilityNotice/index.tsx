@@ -16,12 +16,12 @@ export function EligibilityNotice({ job, busy, onEligibility }: EligibilityNotic
   return (
     <div className="space-y-2 rounded-xl border border-border bg-secondary-soft p-4">
       <div className="flex items-center gap-2 text-sm font-semibold text-secondary-text">
-        <CircleHelp className="size-4 shrink-0" /> Região incerta
+        <CircleHelp className="size-4 shrink-0" /> Uncertain region
       </div>
       <Text as="p" styleVariant="muted" className="text-sm leading-relaxed">
         {job.geo_evidence ||
           job.eligibility_reason ||
-          'Não foi possível confirmar se a vaga aceita candidatos da sua região.'}
+          'Could not confirm whether this job accepts candidates from your region.'}
       </Text>
       <div className="flex flex-wrap gap-2 pt-1">
         <Button
@@ -30,7 +30,7 @@ export function EligibilityNotice({ job, busy, onEligibility }: EligibilityNotic
           disabled={busy}
           onClick={() => onEligibility(job.id, 'compatible')}
         >
-          Aceita minha região
+          Accepts my region
         </Button>
         <Button
           variant="ghost"
@@ -38,7 +38,7 @@ export function EligibilityNotice({ job, busy, onEligibility }: EligibilityNotic
           disabled={busy}
           onClick={() => onEligibility(job.id, 'incompatible')}
         >
-          Não aceita
+          Does not accept
         </Button>
       </div>
     </div>

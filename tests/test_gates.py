@@ -1,6 +1,6 @@
 from datetime import UTC, datetime, timedelta
 
-from app.config import AppConfig
+from app.config import AppConfig, ObjectiveConfig
 from app.models import Eligibility, RawJob
 from app.pipeline.gates import geographic_gate, remote_gate, technical_gate
 
@@ -86,21 +86,21 @@ def test_technical_gate_can_require_a_profile_technology(config: AppConfig) -> N
     )
 
     assert result.accepted is False
-    assert "tecnologia" in result.reason
+    assert "technology" in result.reason
 
 
 def test_technical_gate_rejects_old_job(config: AppConfig) -> None:
     result = technical_gate(raw(date_posted=datetime.now(UTC) - timedelta(days=31)), config)
 
     assert result.accepted is False
-    assert "antiga" in result.reason
+    assert "older" in result.reason
 
 
 def test_technical_gate_rejects_explicit_brl(config: AppConfig) -> None:
     result = technical_gate(raw(salary_currency="BRL"), config)
 
     assert result.accepted is False
-    assert "Moeda" in result.reason
+    assert "Currency" in result.reason
 
 
 def test_technical_gate_rejects_spanish_only_job(config: AppConfig) -> None:
@@ -116,7 +116,7 @@ def test_technical_gate_rejects_spanish_only_job(config: AppConfig) -> None:
     )
 
     assert result.accepted is False
-    assert "Idioma" in result.reason
+    assert "language" in result.reason
 
 
 def test_technical_gate_accepts_portuguese_job(config: AppConfig) -> None:
@@ -132,3 +132,19 @@ def test_technical_gate_accepts_portuguese_job(config: AppConfig) -> None:
     )
 
     assert result.accepted is True
+
+
+def test_us_resident_treats_us_restriction_as_compatible() -> None:
+    job = raw(description="Remote position, US only.")
+
+    result = geographic_gate(job, ObjectiveConfig(pais_residencia="US"))
+
+    assert result.decision == Eligibility.COMPATIBLE
+
+
+def test_timezone_check_uses_configured_offsets() -> None:
+    job = raw(description="Build APIs.", timezone_requirements=["UTC-8 to UTC-5"])
+
+    result = geographic_gate(job, ObjectiveConfig(fusos_aceitos=["UTC-5"]))
+
+    assert result.decision == Eligibility.COMPATIBLE

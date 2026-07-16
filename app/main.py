@@ -42,6 +42,7 @@ def create_app(
 
     app = FastAPI(title="Job Finder", version="0.1.0", lifespan=lifespan)
     app.state.config = config
+    app.state.config_path = config_file
     app.state.repository = repository
     app.state.collectors = collectors
     app.state.pipeline = pipeline
@@ -57,7 +58,7 @@ def create_app(
     def frontend(path: str):
         if index.exists():
             return FileResponse(index)
-        return {"message": "Frontend ainda não compilado. Execute npm run build em web/."}
+        return {"message": "Frontend not built yet. Run npm run build inside web/."}
 
     return app
 

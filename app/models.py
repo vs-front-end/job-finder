@@ -244,3 +244,20 @@ class PlatformUpdate(BaseModel):
 
     tracking_status: PlatformTrackingStatus
     notes: str = Field(default="", max_length=2000)
+
+
+class Preferences(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    profile_summary: str = ""
+    residence_country: str = Field(default="BR", min_length=2, max_length=2)
+    accepted_timezones: list[str] = Field(default_factory=list)
+    accepted_titles: list[str] = Field(default_factory=list)
+    rejected_titles: list[str] = Field(default_factory=list)
+    technologies: list[str] = Field(default_factory=list)
+    require_technology_match: bool = False
+    rejected_keywords: list[str] = Field(default_factory=list)
+    accepted_languages: list[str] = Field(default_factory=list)
+    rejected_currencies: list[str] = Field(default_factory=list)
+    max_age_days: int = Field(default=7, ge=1, le=365)
+    search_terms: list[str] = Field(default_factory=list)

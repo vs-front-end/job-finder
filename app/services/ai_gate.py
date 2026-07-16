@@ -8,9 +8,10 @@ from app.models import GateResult, RawJob
 
 
 class AiGate:
-    def __init__(self, config: AiConfig, profile: str):
+    def __init__(self, config: AiConfig, profile: str, country: str = "BR"):
         self.config = config
         self.profile = profile
+        self.country = country
 
     async def classify(self, job: RawJob, fallback: GateResult) -> GateResult:
         if not self.config.enabled:
@@ -32,19 +33,19 @@ class AiGate:
             return fallback
 
     def _prompt(self, job: RawJob) -> str:
-        return f"""Analise a vaga para um candidato residente no Brasil. Não invente dados.
-Ausência de restrição geográfica significa unknown, nunca yes.
-Retorne SOMENTE JSON com decision, role_match, geo_match, reason, geo_evidence,
-employment_type e payment_currency.
+        return f"""Analyze the job for a candidate residing in {self.country}. Do not invent data.
+Absence of a geographic restriction means unknown, never yes.
+Return ONLY JSON with decision, role_match, geo_match, reason, geo_evidence,
+employment_type and payment_currency.
 
-PERFIL:
+PROFILE:
 {self.profile}
 
-VAGA:
-Título: {job.title}
-Empresa: {job.company}
-Localização: {job.location_text}
-Descrição completa:
+JOB:
+Title: {job.title}
+Company: {job.company}
+Location: {job.location_text}
+Full description:
 {job.description}
 """
 
@@ -53,5 +54,5 @@ Descrição completa:
         start = value.find("{")
         end = value.rfind("}")
         if start < 0 or end < start:
-            raise ValueError("JSON ausente")
+            raise ValueError("missing JSON")
         return GateResult.model_validate_json(value[start : end + 1])

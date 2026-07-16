@@ -3,13 +3,14 @@ import { useEffect, useRef } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { api, type EventType } from './client';
-import type { Eligibility, PlatformTrackingStatus } from './schema';
+import type { Eligibility, PlatformTrackingStatus, Preferences } from './schema';
 
 const keys = {
   jobs: (tab: string, query: string) => ['jobs', tab, query] as const,
   sources: ['sources'] as const,
   platforms: ['platforms'] as const,
   runStatus: ['run-status'] as const,
+  preferences: ['preferences'] as const,
 };
 
 export function useJobs(tab: string, query: string, enabled = true) {
@@ -100,6 +101,18 @@ export function useImportJob() {
   return useMutation({
     mutationFn: api.importUrl,
     onSuccess: async () => client.invalidateQueries({ queryKey: ['jobs'] }),
+  });
+}
+
+export function usePreferences() {
+  return useQuery({ queryKey: keys.preferences, queryFn: api.preferences });
+}
+
+export function useUpdatePreferences() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (preferences: Preferences) => api.updatePreferences(preferences),
+    onSuccess: async () => client.invalidateQueries({ queryKey: keys.preferences }),
   });
 }
 

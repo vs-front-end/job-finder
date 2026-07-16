@@ -4,7 +4,7 @@ import { BriefcaseBusiness, CalendarDays, MapPin, Wallet, type LucideIcon } from
 
 import type { Job } from '@/api/schema';
 
-import { formatPostedDate, formatSalary } from './format';
+import { formatPostedDate, formatSalary } from '../format';
 
 type JobFactsProps = {
   job: Job;
@@ -13,12 +13,12 @@ type JobFactsProps = {
 
 export function JobFacts({ job, className }: JobFactsProps) {
   const facts: { icon: LucideIcon; label: string; value: string }[] = [
-    { icon: MapPin, label: 'Localização', value: job.location_text || job.remote_scope || 'Remoto' },
-    { icon: Wallet, label: 'Remuneração', value: formatSalary(job) ?? 'Não informada' },
-    { icon: CalendarDays, label: 'Publicada', value: formatPostedDate(job) },
+    { icon: MapPin, label: 'Location', value: job.location_text || job.remote_scope || 'Remote' },
+    { icon: Wallet, label: 'Compensation', value: formatSalary(job) ?? 'Not disclosed' },
+    { icon: CalendarDays, label: 'Posted', value: formatPostedDate(job) },
   ];
   if (job.employment_type) {
-    facts.push({ icon: BriefcaseBusiness, label: 'Contrato', value: job.employment_type });
+    facts.push({ icon: BriefcaseBusiness, label: 'Contract', value: job.employment_type });
   }
 
   return (

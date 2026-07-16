@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 
 import {
   Badge,
@@ -18,17 +17,17 @@ import type { Platform, PlatformTrackingStatus } from '@/api/schema';
 import { InitialsAvatar } from '@/components';
 
 const availabilityLabel = {
-  active: 'Automática',
-  needs_key: 'Precisa de chave',
+  active: 'Automatic',
+  needs_key: 'Needs key',
   manual: 'Manual',
-  planned: 'Planejada',
+  planned: 'Planned',
 } as const;
 
 const trackingLabel: Record<PlatformTrackingStatus, string> = {
-  pending: 'Pendente',
-  done: 'Configurada / revisada',
-  review_due: 'Revisar novamente',
-  skipped: 'Ignorar',
+  pending: 'Pending',
+  done: 'Configured / reviewed',
+  review_due: 'Review again',
+  skipped: 'Skip',
 };
 
 type PlatformCardProps = {
@@ -63,7 +62,7 @@ export function PlatformCard({ platform, busy, onUpdate }: PlatformCardProps) {
 
       {automatic ? (
         <div className="flex items-center gap-2 rounded-lg bg-success-soft px-3 py-2 text-sm font-medium text-success-text">
-          <CheckCircle2 className="size-4 shrink-0" /> Coleta integrada
+          <CheckCircle2 className="size-4 shrink-0" /> Collection integrated
         </div>
       ) : (
         <Select
@@ -90,7 +89,7 @@ export function PlatformCard({ platform, busy, onUpdate }: PlatformCardProps) {
         </Text>
         <Button variant="outline" size="sm" asChild>
           <a href={platform.url} target="_blank" rel="noreferrer">
-            Abrir <ArrowUpRight />
+            Open <ArrowUpRight />
           </a>
         </Button>
       </div>
@@ -106,9 +105,9 @@ function availabilityVariant(availability: Platform['availability']) {
 }
 
 function reviewLabel(platform: Platform) {
-  if (platform.availability === 'needs_key') return 'Configure a chave gratuita';
+  if (platform.availability === 'needs_key') return 'Set up the free key';
   if (!platform.last_reviewed_at) return trackingLabel[platform.tracking_status];
-  return `Revisada em ${format(new Date(platform.last_reviewed_at), "dd 'de' MMM", { locale: ptBR })}`;
+  return `Reviewed on ${format(new Date(platform.last_reviewed_at), 'MMM d')}`;
 }
 
 function isTrackingStatus(value: string): value is PlatformTrackingStatus {

@@ -6,7 +6,7 @@ import { MapPin } from 'lucide-react';
 import type { Job } from '@/api/schema';
 import { InitialsAvatar } from '@/components';
 
-import { formatAge, formatSalary } from './format';
+import { formatAge, formatSalary } from '../format';
 
 type JobRowProps = {
   job: Job;
@@ -49,19 +49,18 @@ export function JobRow({ job, active, onSelect }: JobRowProps) {
         <div className="col-start-2 flex w-full min-w-0 items-center justify-self-start gap-1.5 text-muted md:col-start-auto">
           <MapPin className="size-3.5 shrink-0" />
           <Text as="p" styleVariant="muted" className="truncate text-xs">
-            {job.location_text || job.remote_scope || 'Remoto'}
+            {job.location_text || job.remote_scope || 'Remote'}
           </Text>
         </div>
         <div className="col-start-2 flex items-center justify-between gap-3 md:col-start-auto md:block md:text-right">
           <Text as="p" className="truncate text-xs font-semibold">
-            {salary ?? 'Salário não informado'}
+            {salary ?? 'Salary not disclosed'}
           </Text>
           <Text as="span" styleVariant="muted" className="mt-1 whitespace-nowrap text-[11px]">
             {formatAge(job)}
           </Text>
         </div>
       </button>
-
     </div>
   );
 }

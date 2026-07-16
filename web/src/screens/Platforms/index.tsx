@@ -25,10 +25,10 @@ import { PlatformCard } from './PlatformCard';
 type PlatformFilter = 'all' | 'automatic' | 'manual' | 'planned';
 
 const filters: { value: PlatformFilter; label: string }[] = [
-  { value: 'all', label: 'Todas' },
-  { value: 'automatic', label: 'Automáticas' },
-  { value: 'manual', label: 'Manuais' },
-  { value: 'planned', label: 'Planejadas' },
+  { value: 'all', label: 'All' },
+  { value: 'automatic', label: 'Automatic' },
+  { value: 'manual', label: 'Manual' },
+  { value: 'planned', label: 'Planned' },
 ];
 
 const skeletonKeys = ['one', 'two', 'three', 'four', 'five', 'six'];
@@ -48,7 +48,7 @@ export function PlatformsScreen() {
     update.mutate(
       { id: platform.id, trackingStatus, notes: platform.notes },
       {
-        onSuccess: () => toast.success('Checklist atualizada'),
+        onSuccess: () => toast.success('Checklist updated'),
         onError: (error) => toast.error(error.message),
       },
     );
@@ -59,15 +59,14 @@ export function PlatformsScreen() {
       <section className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <Text as="h2" className="font-display text-3xl font-bold tracking-tight md:text-4xl">
-            Plataformas e perfis
+            Platforms & profiles
           </Text>
           <Text as="p" styleVariant="muted" className="mt-1 max-w-2xl text-sm">
-            Coletores automáticos, redes de talentos e pesquisas manuais em um único lugar.
+            Automatic collectors, talent networks and manual searches in one place.
           </Text>
         </div>
         <Text as="p" styleVariant="muted" className="font-mono text-xs">
-          {automatic} automáticas · {manualPending} manuais pendentes · {platforms.length}{' '}
-          catalogadas
+          {automatic} automatic · {manualPending} manual pending · {platforms.length} cataloged
         </Text>
       </section>
 
@@ -95,7 +94,7 @@ export function PlatformsScreen() {
             <EmptyMedia variant="icon">
               <RadioTower />
             </EmptyMedia>
-            <EmptyTitle>Não foi possível carregar as plataformas</EmptyTitle>
+            <EmptyTitle>Could not load platforms</EmptyTitle>
             <EmptyDescription>{query.error.message}</EmptyDescription>
           </EmptyHeader>
         </Empty>

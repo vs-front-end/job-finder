@@ -32,20 +32,20 @@ import { queueItems, type QueueTab } from './queue';
 import { QueueSidebar } from './QueueSidebar';
 
 const actionToasts: Partial<Record<EventType, string>> = {
-  saved: 'Vaga salva',
-  dismissed: 'Vaga descartada',
-  applied_manual: 'Candidatura registrada',
+  saved: 'Job saved',
+  dismissed: 'Job dismissed',
+  applied_manual: 'Application recorded',
 };
 
 const emptyCopy: Record<QueueTab, string> = {
-  new: 'Rode as fontes para buscar novas oportunidades.',
-  uncertain: 'Nenhuma vaga aguardando revisão de região.',
-  saved: 'Vagas salvas aparecem aqui para você decidir depois.',
-  applied: 'Registre uma candidatura para acompanhá-la aqui.',
-  in_process: 'Quando uma candidatura avançar de etapa, ela aparece aqui.',
-  closed: 'Nenhuma vaga encerrada por enquanto.',
-  dismissed: 'Nenhuma vaga descartada.',
-  all: 'Rode as fontes para começar a preencher o radar.',
+  new: 'Run the sources to fetch new opportunities.',
+  uncertain: 'No jobs waiting for region review.',
+  saved: 'Saved jobs land here so you can decide later.',
+  applied: 'Record an application to track it here.',
+  in_process: 'When an application moves forward, it shows up here.',
+  closed: 'No closed jobs yet.',
+  dismissed: 'No dismissed jobs.',
+  all: 'Run the sources to start filling the radar.',
 };
 
 const skeletonKeys = ['one', 'two', 'three', 'four', 'five', 'six'];
@@ -90,7 +90,7 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
       { jobId, type: event, notes },
       {
         onSuccess: () => {
-          toast.success(actionToasts[event] ?? 'Etapa atualizada');
+          toast.success(actionToasts[event] ?? 'Stage updated');
           setDialogJob(null);
         },
         onError: (error) => toast.error(error.message),
@@ -100,9 +100,9 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
 
   const handleEligibility = (jobId: number, value: Eligibility) => {
     actions.eligibility.mutate(
-      { jobId, value, reason: 'Correção manual do usuário' },
+      { jobId, value, reason: 'Manual correction by the user' },
       {
-        onSuccess: () => toast.success('Elegibilidade corrigida'),
+        onSuccess: () => toast.success('Eligibility updated'),
         onError: (error) => toast.error(error.message),
       },
     );
@@ -110,7 +110,7 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
 
   const handleVerify = (jobId: number) => {
     actions.verify.mutate(jobId, {
-      onSuccess: (result) => toast.success(result.open ? 'Link ativo' : 'Vaga encerrada'),
+      onSuccess: (result) => toast.success(result.open ? 'Link is live' : 'Job closed'),
       onError: (error) => toast.error(error.message),
     });
   };
@@ -124,10 +124,10 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
           <div className="mb-5 flex shrink-0 flex-wrap items-end justify-between gap-3">
             <div>
               <Text as="h2" className="font-display text-2xl font-bold tracking-tight md:text-3xl">
-                Encontre sua próxima vaga
+                Find your next role
               </Text>
               <Text as="p" styleVariant="muted" className="mt-1 text-sm">
-                Oportunidades remotas selecionadas para o seu perfil.
+                Remote opportunities curated for your profile.
               </Text>
             </div>
             <div
@@ -142,7 +142,7 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
                   running ? 'animate-pulse bg-primary' : 'bg-error',
                 )}
               />
-              {running ? 'Busca ativa' : 'Busca desligada'}
+              {running ? 'Scan running' : 'Scan idle'}
             </div>
           </div>
 
@@ -175,11 +175,11 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
           <div className="flex h-11 shrink-0 items-center justify-between gap-3 px-1">
             <Text as="p" styleVariant="muted" className="text-xs font-medium">
               {activeQueue?.label} · {visibleJobs.length}{' '}
-              {visibleJobs.length === 1 ? 'resultado' : 'resultados'}
+              {visibleJobs.length === 1 ? 'result' : 'results'}
             </Text>
             {hasSearch && (
               <Button variant="ghost" size="sm" onClick={() => setQuery('')}>
-                Limpar busca
+                Clear search
               </Button>
             )}
           </div>
@@ -203,7 +203,7 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
                   <EmptyMedia variant="icon">
                     <RadioTower />
                   </EmptyMedia>
-                  <EmptyTitle>Não foi possível falar com o radar</EmptyTitle>
+                  <EmptyTitle>Could not reach the radar</EmptyTitle>
                   <EmptyDescription>{jobs.error.message}</EmptyDescription>
                 </EmptyHeader>
               </Empty>
@@ -215,21 +215,21 @@ export function JobsScreen({ running, onRun }: JobsScreenProps) {
                   <EmptyMedia variant="icon">
                     <Sparkles />
                   </EmptyMedia>
-                  <EmptyTitle>Nenhuma vaga nesta fila</EmptyTitle>
+                  <EmptyTitle>No jobs in this queue</EmptyTitle>
                   <EmptyDescription>
                     {hasSearch
-                      ? 'Tente buscar por outro cargo, empresa ou tecnologia.'
+                      ? 'Try another role, company or technology.'
                       : emptyCopy[tab]}
                   </EmptyDescription>
                 </EmptyHeader>
                 {hasSearch ? (
                   <Button variant="outline" onClick={() => setQuery('')}>
-                    Limpar busca
+                    Clear search
                   </Button>
                 ) : (
                   (tab === 'new' || tab === 'all') && (
                     <Button disabled={running} onClick={onRun}>
-                      <Play /> Rodar fontes
+                      <Play /> Run sources
                     </Button>
                   )
                 )}

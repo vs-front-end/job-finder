@@ -29,27 +29,27 @@ export function AddJobDialog({ open, busy, error, onOpenChange, onSubmit }: AddJ
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Adicionar vaga por URL</DialogTitle>
+          <DialogTitle>Add job from URL</DialogTitle>
           <DialogDescription>
-            O radar lê o JobPosting estruturado da página e aplica os mesmos filtros da coleta.
+            The radar reads the page's structured JobPosting and applies the same collection
+            filters.
           </DialogDescription>
         </DialogHeader>
         <InputText
-          label="Link público da vaga"
-          placeholder="https://empresa.com/careers/vaga"
+          label="Public job link"
+          placeholder="https://company.com/careers/job"
           value={url}
           onChange={setUrl}
           startIcon={Link}
           error={error ?? undefined}
         />
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
           <Button disabled={!valid || busy} onClick={() => onSubmit(url)}>
-            {busy ? 'Lendo página…' : 'Adicionar vaga'}
+            {busy ? 'Reading page…' : 'Add job'}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
-

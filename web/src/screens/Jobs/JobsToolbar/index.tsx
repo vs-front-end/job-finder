@@ -10,7 +10,7 @@ type JobsToolbarProps = {
 export function JobsToolbar({ query, onQueryChange }: JobsToolbarProps) {
   return (
     <InputText
-      placeholder="Busque por cargo, empresa ou tecnologia"
+      placeholder="Search by role, company or technology"
       value={query}
       onChange={onQueryChange}
       startIcon={Search}

@@ -113,7 +113,23 @@ export const platformSchema = z.object({
   notes: z.string(),
 });
 
+export const preferencesSchema = z.object({
+  profile_summary: z.string(),
+  residence_country: z.string(),
+  accepted_timezones: z.array(z.string()),
+  accepted_titles: z.array(z.string()),
+  rejected_titles: z.array(z.string()),
+  technologies: z.array(z.string()),
+  require_technology_match: z.boolean(),
+  rejected_keywords: z.array(z.string()),
+  accepted_languages: z.array(z.string()),
+  rejected_currencies: z.array(z.string()),
+  max_age_days: z.number(),
+  search_terms: z.array(z.string()),
+});
+
 export type Job = z.infer<typeof jobSchema>;
+export type Preferences = z.infer<typeof preferencesSchema>;
 export type JobList = z.infer<typeof jobListSchema>;
 export type SourceHealth = z.infer<typeof sourceHealthSchema>;
 export type Eligibility = z.infer<typeof eligibilitySchema>;

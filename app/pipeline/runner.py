@@ -20,12 +20,12 @@ class Pipeline:
         self.repository = repository
         self.config = config
         self.lock = asyncio.Lock()
-        self.ai_gate = AiGate(config.ia, config.perfil.resumo)
+        self.ai_gate = AiGate(config.ia, config.perfil.resumo, config.objetivo.pais_residencia)
         self.link_verifier = LinkVerifier(config.limites.timeout_segundos)
 
     async def run(self, collectors: list[Collector]) -> list[RunSummary]:
         if self.lock.locked():
-            raise RuntimeError("Já existe uma coleta em andamento")
+            raise RuntimeError("A collection run is already in progress")
         async with self.lock:
             summaries = []
             for collector in collectors:
@@ -82,7 +82,7 @@ class Pipeline:
                         if existing:
                             self.repository.delete_job(existing.job_id)
                         continue
-                    gate = geographic_gate(raw_job, self.config.objetivo.pais_residencia)
+                    gate = geographic_gate(raw_job, self.config.objetivo)
                     if gate.decision != Eligibility.INCOMPATIBLE:
                         gate = await self.ai_gate.classify(raw_job, gate)
                     normalized = normalize_job(raw_job, gate, technical.technologies)

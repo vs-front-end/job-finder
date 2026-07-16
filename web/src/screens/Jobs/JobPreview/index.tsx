@@ -6,10 +6,10 @@ import type { EventType } from '@/api/client';
 import type { Eligibility, Job } from '@/api/schema';
 import { InitialsAvatar } from '@/components';
 
-import { EligibilityNotice } from './EligibilityNotice';
-import { JobFacts } from './JobFacts';
-import { RichDescription } from './RichDescription';
-import { workflowLabels } from './format';
+import { EligibilityNotice } from '../EligibilityNotice';
+import { JobFacts } from '../JobFacts';
+import { RichDescription } from '../RichDescription';
+import { workflowLabels } from '../format';
 
 type JobPreviewProps = {
   job: Job | null;
@@ -27,7 +27,7 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
           <MousePointerClick className="size-5" />
         </div>
         <Text as="p" styleVariant="muted" className="text-sm">
-          Selecione uma vaga na lista para ver os detalhes aqui.
+          Select a job from the list to see its details here.
         </Text>
       </div>
     );
@@ -45,7 +45,7 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
               {job.company}
             </Text>
             <Text as="p" styleVariant="muted" className="mt-1 truncate text-xs">
-              {job.sources[0]?.source ?? 'Oportunidade remota'}
+              {job.sources[0]?.source ?? 'Remote opportunity'}
             </Text>
           </div>
           {isNew && (
@@ -54,8 +54,8 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
                 variant="ghost"
                 size="icon-sm"
                 className="h-8 w-10 rounded-none border-r border-border hover:bg-primary-soft hover:text-primary-text"
-                title="Salvar"
-                aria-label="Salvar vaga"
+                title="Save"
+                aria-label="Save job"
                 disabled={busy}
                 onClick={() => onAction(job.id, 'saved')}
               >
@@ -65,8 +65,8 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
                 variant="ghost"
                 size="icon-sm"
                 className="h-8 w-10 rounded-none border-r border-border hover:bg-primary-soft hover:text-primary-text"
-                title="Processo"
-                aria-label="Abrir processo"
+                title="Process"
+                aria-label="Open process"
                 onClick={() => onDetails(job)}
               >
                 <Settings2 />
@@ -75,8 +75,8 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
                 variant="ghost"
                 size="icon-sm"
                 className="h-8 w-10 rounded-none hover:bg-error-soft hover:text-error-text"
-                title="Descartar"
-                aria-label="Descartar vaga"
+                title="Dismiss"
+                aria-label="Dismiss job"
                 disabled={busy}
                 onClick={() => onAction(job.id, 'dismissed')}
               >
@@ -92,7 +92,7 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
         </div>
         <div className="flex flex-wrap justify-start gap-1.5">
           {!isNew && <Badge>{workflowLabels[job.workflow_status]}</Badge>}
-          <Badge variant="outline">{job.location_text || job.remote_scope || 'Remoto'}</Badge>
+          <Badge variant="outline">{job.location_text || job.remote_scope || 'Remote'}</Badge>
           {job.relevant_technologies.map((technology) => (
             <Badge key={technology} variant="outline">
               {technology}
@@ -106,13 +106,13 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
         <JobFacts job={job} />
         <div className="space-y-2">
           <Text as="h4" className="text-sm font-semibold">
-            Descrição
+            Description
           </Text>
           <RichDescription html={job.description_html} text={job.description} />
         </div>
         {job.sources.length > 0 && (
           <Text as="p" styleVariant="muted" className="text-xs">
-            Fonte: {job.sources.map((source) => source.source).join(', ')}
+            Source: {job.sources.map((source) => source.source).join(', ')}
           </Text>
         )}
       </div>
@@ -121,16 +121,16 @@ export function JobPreview({ job, busy, onAction, onEligibility, onDetails }: Jo
         <div className="grid grid-cols-2 gap-2">
           <Button variant="outline" asChild>
             <a href={job.apply_url} target="_blank" rel="noreferrer">
-              Abrir vaga <ArrowUpRight />
+              Open job <ArrowUpRight />
             </a>
           </Button>
           {isNew ? (
             <Button disabled={busy} onClick={() => onAction(job.id, 'applied_manual')}>
-              <Check /> Candidatei
+              <Check /> Applied
             </Button>
           ) : (
             <Button variant="secondary" onClick={() => onDetails(job)}>
-              <Settings2 /> Processo
+              <Settings2 /> Process
             </Button>
           )}
         </div>

@@ -1,7 +1,7 @@
 import { cn } from '@stellar-ui-kit/shared';
 import { Text } from '@stellar-ui-kit/web';
 
-import { queueGroups, type QueueTab } from './queue';
+import { queueGroups, type QueueTab } from '../queue';
 
 type QueueSidebarProps = {
   tab: QueueTab;

@@ -32,7 +32,7 @@ class JobPageExtractor:
         soup = BeautifulSoup(response.text, "html.parser")
         posting = self._find_posting(soup)
         if not posting:
-            raise ValueError("A página não possui JSON-LD JobPosting reconhecível")
+            raise ValueError("The page has no recognizable JSON-LD JobPosting")
         organization = mapping(posting.get("hiringOrganization"))
         salary = mapping(posting.get("baseSalary"))
         salary_value = mapping(salary.get("value"))

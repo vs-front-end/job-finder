@@ -21,10 +21,10 @@ import type { EventType } from '@/api/client';
 import type { Eligibility, Job } from '@/api/schema';
 import { InitialsAvatar } from '@/components';
 
-import { EligibilityNotice } from './EligibilityNotice';
-import { JobFacts } from './JobFacts';
-import { RichDescription } from './RichDescription';
-import { workflowLabels } from './format';
+import { EligibilityNotice } from '../EligibilityNotice';
+import { JobFacts } from '../JobFacts';
+import { RichDescription } from '../RichDescription';
+import { workflowLabels } from '../format';
 
 type JobDetailsDialogProps = {
   job: Job | null;
@@ -36,19 +36,19 @@ type JobDetailsDialogProps = {
 };
 
 const stages: { value: EventType; label: string }[] = [
-  { value: 'applied_manual', label: 'Candidatei' },
-  { value: 'interview_hr', label: 'Entrevista RH' },
-  { value: 'code_test', label: 'Teste técnico' },
-  { value: 'interview_technical', label: 'Entrevista técnica' },
-  { value: 'offer', label: 'Oferta' },
-  { value: 'rejected', label: 'Rejeitada' },
-  { value: 'withdrawn', label: 'Desisti' },
+  { value: 'applied_manual', label: 'Applied' },
+  { value: 'interview_hr', label: 'HR interview' },
+  { value: 'code_test', label: 'Code test' },
+  { value: 'interview_technical', label: 'Technical interview' },
+  { value: 'offer', label: 'Offer' },
+  { value: 'rejected', label: 'Rejected' },
+  { value: 'withdrawn', label: 'Withdrawn' },
 ];
 
 const eligibilityOptions: { value: Eligibility; label: string }[] = [
-  { value: 'compatible', label: 'Compatível' },
-  { value: 'uncertain', label: 'Incerta' },
-  { value: 'incompatible', label: 'Incompatível' },
+  { value: 'compatible', label: 'Compatible' },
+  { value: 'uncertain', label: 'Uncertain' },
+  { value: 'incompatible', label: 'Incompatible' },
 ];
 
 export function JobDetailsDialog({
@@ -100,7 +100,7 @@ export function JobDetailsDialog({
 
             <div className="space-y-2">
               <Text as="h3" className="text-sm font-semibold">
-                Sobre a vaga
+                About the job
               </Text>
               <RichDescription
                 html={job.description_html}
@@ -114,16 +114,16 @@ export function JobDetailsDialog({
             <div className="space-y-3">
               <div>
                 <Text as="h3" className="text-sm font-semibold">
-                  Acompanhar processo
+                  Track the process
                 </Text>
                 <Text as="p" styleVariant="muted" className="mt-0.5 text-sm">
-                  Registre a próxima etapa sem perder o histórico.
+                  Record the next stage without losing history.
                 </Text>
               </div>
               <TextArea
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
-                placeholder="Nota opcional"
+                placeholder="Optional note"
                 containerClassName="max-w-none"
               />
               <div className="flex flex-wrap gap-2">
@@ -144,7 +144,7 @@ export function JobDetailsDialog({
             <div className="grid gap-6 border-t border-border pt-5 md:grid-cols-2">
               <div className="space-y-2">
                 <Text as="h3" className="text-sm font-semibold">
-                  Fontes
+                  Sources
                 </Text>
                 <div className="flex flex-wrap gap-2">
                   {job.sources.map((source) => (
@@ -163,7 +163,7 @@ export function JobDetailsDialog({
               </div>
               <div className="space-y-2">
                 <Text as="h3" className="text-sm font-semibold">
-                  Classificação
+                  Classification
                 </Text>
                 <div className="flex flex-wrap gap-2">
                   {eligibilityOptions.map((option) => (
@@ -184,11 +184,11 @@ export function JobDetailsDialog({
 
             <DialogFooter>
               <Button variant="ghost" disabled={busy} onClick={() => onVerify(job.id)}>
-                <RefreshCw /> Revalidar link
+                <RefreshCw /> Recheck link
               </Button>
               <Button asChild>
                 <a href={job.apply_url} target="_blank" rel="noreferrer">
-                  Abrir candidatura <ArrowUpRight />
+                  Open application <ArrowUpRight />
                 </a>
               </Button>
             </DialogFooter>

@@ -3,10 +3,12 @@ import { z } from 'zod';
 import {
   jobListSchema,
   platformSchema,
+  preferencesSchema,
   runStatusSchema,
   sourceHealthSchema,
   type Eligibility,
   type PlatformTrackingStatus,
+  type Preferences,
 } from './schema';
 
 export type EventType =
@@ -29,7 +31,7 @@ async function request(path: string, init?: RequestInit): Promise<unknown> {
   if (!response.ok) {
     const payload: unknown = await response.json().catch(() => null);
     const detail = z.object({ detail: z.string() }).safeParse(payload);
-    throw new Error(detail.success ? detail.data.detail : 'Não foi possível concluir a ação');
+    throw new Error(detail.success ? detail.data.detail : 'The request could not be completed');
   }
   return response.status === 204 ? null : response.json();
 }
@@ -69,6 +71,14 @@ export const api = {
   },
   async platforms() {
     return z.array(platformSchema).parse(await request('/api/platforms'));
+  },
+  async preferences() {
+    return preferencesSchema.parse(await request('/api/preferences'));
+  },
+  async updatePreferences(preferences: Preferences) {
+    return preferencesSchema.parse(
+      await request('/api/preferences', { method: 'PUT', body: JSON.stringify(preferences) }),
+    );
   },
   async updatePlatform(id: string, trackingStatus: PlatformTrackingStatus, notes: string) {
     return platformSchema.parse(

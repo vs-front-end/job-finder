@@ -1,5 +1,4 @@
 import { formatDistanceToNowStrict } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 
 import {
   Badge,
@@ -22,10 +21,10 @@ type SourceHealthDialogProps = {
 };
 
 const statusLabels: Record<string, string> = {
-  success: 'Sucesso',
-  error: 'Erro',
-  running: 'Executando',
-  partial: 'Parcial',
+  success: 'Success',
+  error: 'Error',
+  running: 'Running',
+  partial: 'Partial',
 };
 
 function statusVariant(status: string): 'success' | 'destructive' | 'warning' | 'outline' {
@@ -45,19 +44,19 @@ export function SourceHealthDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Saúde das fontes</DialogTitle>
-          <DialogDescription>Último resultado registrado para cada coletor.</DialogDescription>
+          <DialogTitle>Source health</DialogTitle>
+          <DialogDescription>Latest recorded result for each collector.</DialogDescription>
         </DialogHeader>
         <ScrollArea className="max-h-[65vh] pr-3">
           <div className="space-y-2">
             {loading && (
               <Text as="p" styleVariant="muted">
-                Carregando fontes…
+                Loading sources…
               </Text>
             )}
             {!loading && sources.length === 0 && (
               <Text as="p" styleVariant="muted">
-                Nenhuma fonte executada ainda.
+                No source has run yet.
               </Text>
             )}
             {sources.map((source) => (
@@ -70,7 +69,6 @@ export function SourceHealthDialog({
                     <Text as="p" styleVariant="muted" className="mt-0.5 text-xs">
                       {formatDistanceToNowStrict(new Date(source.started_at), {
                         addSuffix: true,
-                        locale: ptBR,
                       })}
                     </Text>
                   </div>
@@ -79,10 +77,10 @@ export function SourceHealthDialog({
                   </Badge>
                 </div>
                 <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  <SourceStat label="Coletadas" value={source.fetched} />
-                  <SourceStat label="Novas" value={source.inserted} />
-                  <SourceStat label="Duplicatas" value={source.duplicates} />
-                  <SourceStat label="Erros" value={source.errors} />
+                  <SourceStat label="Fetched" value={source.fetched} />
+                  <SourceStat label="New" value={source.inserted} />
+                  <SourceStat label="Duplicates" value={source.duplicates} />
+                  <SourceStat label="Errors" value={source.errors} />
                 </dl>
                 {source.error_message && (
                   <Text as="p" className="mt-3 text-xs text-error-text">

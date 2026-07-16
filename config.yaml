@@ -1,14 +1,15 @@
 perfil:
   resumo: |
-    Desenvolvedor frontend e full stack residente no Brasil, com experiência em React,
-    React Native, TypeScript, JavaScript e aplicações web e mobile. Inglês profissional.
+    Frontend and full stack developer based in Brazil, experienced with React,
+    React Native, TypeScript, JavaScript and web and mobile applications.
+    Professional working English.
 
 objetivo:
   pais_residencia: BR
   fusos_aceitos: ["UTC-5", "UTC-4", "UTC-3", "UTC-2"]
   moedas_preferidas: [USD, EUR, GBP, CAD, CHF, AUD, NZD]
   modalidades: [full-time, contractor, eor]
-  aceita_vaga_brasileira: true
+  aceita_vaga_brasileira: false
 
 filtros:
   titulos_aceitos:

@@ -28,26 +28,26 @@ type QueueItem = {
 
 export const queueGroups: { label: string; items: QueueItem[] }[] = [
   {
-    label: 'Triagem',
+    label: 'Triage',
     items: [
-      { value: 'new', label: 'Novas', icon: Inbox },
-      { value: 'uncertain', label: 'Revisar região', icon: CircleHelp },
-      { value: 'saved', label: 'Salvas', icon: Bookmark },
+      { value: 'new', label: 'New', icon: Inbox },
+      { value: 'uncertain', label: 'Region review', icon: CircleHelp },
+      { value: 'saved', label: 'Saved', icon: Bookmark },
     ],
   },
   {
     label: 'Pipeline',
     items: [
-      { value: 'applied', label: 'Candidatei', icon: Send },
-      { value: 'in_process', label: 'Em processo', icon: Activity },
+      { value: 'applied', label: 'Applied', icon: Send },
+      { value: 'in_process', label: 'In process', icon: Activity },
     ],
   },
   {
-    label: 'Arquivo',
+    label: 'Archive',
     items: [
-      { value: 'closed', label: 'Encerradas', icon: Archive },
-      { value: 'dismissed', label: 'Descartadas', icon: CircleX },
-      { value: 'all', label: 'Todas as vagas', icon: Layers },
+      { value: 'closed', label: 'Closed', icon: Archive },
+      { value: 'dismissed', label: 'Dismissed', icon: CircleX },
+      { value: 'all', label: 'All jobs', icon: Layers },
     ],
   },
 ];

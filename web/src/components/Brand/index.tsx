@@ -14,7 +14,7 @@ export function Brand() {
           Job Finder
         </Text>
         <Text as="p" styleVariant="muted" className="mt-1 text-[11px] leading-none">
-          Seu radar de oportunidades
+          Your remote job radar
         </Text>
       </div>
     </div>
