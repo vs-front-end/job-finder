@@ -182,17 +182,42 @@ empresas:
   - { nome: Zscaler, ats: greenhouse, board: zscaler }
   - { nome: Rocket Lab, ats: greenhouse, board: rocketlab }
   - { nome: Sumō Logic, ats: greenhouse, board: sumologic }
+  - { nome: Sourcegraph, ats: greenhouse, board: sourcegraph91, prioridade: alta }
+  - { nome: Fingerprint, ats: greenhouse, board: fingerprint }
+  - { nome: Bitso, ats: greenhouse, board: bitso, prioridade: alta }
+  - { nome: OpenZeppelin, ats: greenhouse, board: openzeppelin, prioridade: alta }
+  - { nome: Sezzle, ats: greenhouse, board: sezzle }
   - { nome: Linear, ats: ashby, board: linear, prioridade: alta }
   - { nome: Deel, ats: ashby, board: Deel, prioridade: alta }
   - { nome: Notion, ats: ashby, board: notion }
   - { nome: Luxor, ats: ashby, board: luxor }
   - { nome: Kindred, ats: ashby, board: kindred }
+  - { nome: Zapier, ats: ashby, board: zapier, prioridade: alta }
+  - { nome: PostHog, ats: ashby, board: posthog, prioridade: alta }
+  - { nome: Supabase, ats: ashby, board: supabase, prioridade: alta }
+  - { nome: RevenueCat, ats: ashby, board: revenuecat, prioridade: alta }
+  - { nome: Docker, ats: ashby, board: docker }
+  - { nome: ElevenLabs, ats: ashby, board: elevenlabs }
+  - { nome: Railway, ats: ashby, board: railway }
+  - { nome: Circle, ats: ashby, board: circle }
+  - { nome: Oyster, ats: ashby, board: oyster, prioridade: alta }
+  - { nome: Chili Piper, ats: ashby, board: chilipiper }
+  - { nome: Anima, ats: ashby, board: anima }
+  - { nome: Rutter, ats: ashby, board: rutter }
+  - { nome: Quora, ats: ashby, board: quora }
+  - { nome: Tremendous, ats: ashby, board: tremendous }
+  - { nome: Hubstaff, ats: ashby, board: hubstaff }
+  - { nome: DuckDuckGo, ats: ashby, board: duck-duck-go }
   - { nome: Findem, ats: lever, board: findem }
   - { nome: Appen, ats: lever, board: appen-2 }
   - { nome: Ollie, ats: lever, board: myollie }
   - { nome: Anomali, ats: lever, board: anomali }
   - { nome: Lifen, ats: lever, board: lifen }
   - { nome: Kraken, ats: lever, board: kraken, prioridade: alta }
+  - { nome: dLocal, ats: lever, board: dlocal, prioridade: alta }
+  - { nome: Yuno, ats: lever, board: yuno, prioridade: alta }
+  - { nome: Offchain Labs, ats: lever, board: offchainlabs }
+  - { nome: Doola, ats: lever, board: doola }
 
 feeds:
   google_alerts: []
