@@ -549,7 +549,6 @@ class WeWorkRemotelyCollector:
         "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss",
         "https://weworkremotely.com/categories/remote-front-end-programming-jobs.rss",
         "https://weworkremotely.com/categories/remote-programming-jobs.rss",
-        "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss",
     )
 
     def __init__(self, timeout: int, limit: int):

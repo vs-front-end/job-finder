@@ -35,7 +35,7 @@ filtros:
     - '\bdirector\b'
     - '\bvp\b'
     - '\bintern(ship)?\b'
-    - 'back.?end'
+    - '^(?!.*(?:front.?end|full.?stack)).*back.?end'
     - '\bdevops\b'
     - 'site reliability'
     - 'platform engineer'
@@ -49,7 +49,7 @@ filtros:
     - 'cloud engineer'
     - 'infrastructure engineer'
   senioridades: []
-  tecnologias: [React, React Native, TypeScript, JavaScript]
+  tecnologias: [React, ReactJS, React Native, TypeScript, JavaScript]
   exigir_tecnologia_compativel: true
   palavras_rejeitadas: []
   idiomas_aceitos: [en, pt]
